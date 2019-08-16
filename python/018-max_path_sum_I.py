@@ -22,14 +22,13 @@ def walk_through(triangle, paths=[], x=0, y=0, path=[]):
         if y+1 == len(triangle[-1]):
             return paths
         return [*paths, path]
-        
+
     new_path = [*path, triangle[x][y]]
     return [
         *walk_through(triangle, paths, x+1, y, new_path),
         *walk_through(triangle, paths, x+1, y+1, new_path)
     ]
 
-    
 paths = walk_through(triangle)
 max_path_sum = max([sum(x) for x in paths])
 

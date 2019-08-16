@@ -13,6 +13,7 @@ main = do
                                               -- to the arbirary range
     print (nth_prime 10000) -- better but meh since we're testing every divisor each time,
                             -- should keep a list of them
+    -- print (primes !! 10000) -- from the haskell website, stream of numbers (takes forever)
 
 nth_prime :: Int -> Int
 nth_prime n = nth_check n 0
@@ -39,3 +40,6 @@ is_prime x
             | x `mod` d == 0 || x `mod` (d + 2) == 0 = False
             | otherwise = trial_div (d + 6)
 
+primes :: [Int]
+primes = filterPrimes [2..]
+    where filterPrimes (p:xs) = p : filterPrimes [x | x <- xs, x `mod` p /= 0]
