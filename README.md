@@ -2,4 +2,7 @@
 
 My attempt at solving some of the [Project Euler](https://projecteuler.net/) problems.
 
-This is a mess btw but the solutions are in [c/](c/), [python/](python/) and [haskell/](haskell/).
+I try to solve each problem in multiple languages:
+- [haskell/](haskell/), beauty
+- [python/](python/), simplicity
+- [C](c/), just used to bruteforce stuff
