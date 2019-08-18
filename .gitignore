@@ -1,7 +1,12 @@
 *.o
 a.out
 __pycache__
+# haskell/**/*
+# !haskell/**/*.hs
+
 haskell/*
 !haskell/*.hs
-haskell/wip/
+!haskell/wip
+haskell/wip/*
 !haskell/wip/*.hs
+
