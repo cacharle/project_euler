@@ -13,7 +13,4 @@
 
 
 -- this must be a nightmare in C
-main = putStrLn $ lastN 10 (show (28433 * 2 ^ 7830457 + 1))
-
-lastN :: Int -> [a] -> [a]
-lastN n xs = drop (length xs - n) xs
+main = putStrLn (show ((28433 * 2 ^ 7830457 + 1) `mod` 10 ^ 10))
