@@ -24,16 +24,16 @@
 
 
 main = do
-    print $ firstDropBellow 0.1 3 0
+    print $ firstDropBellow 0.1 0 0
 
-firstDropBellow :: Double -> Int -> Int -> (Int, Int, Double)
+firstDropBellow :: Double -> Int -> Int -> Int
 firstDropBellow percent counter n
-    | primesRatio < percent = (n, 2 * n + 1, primesRatio)
+    | counter /= 0 && primesRatio < percent = 2 * n + 1
     | otherwise = firstDropBellow percent (counter + countPrimes) (n + 1)
     where primesRatio =  (fromIntegral countPrimes + fromIntegral counter)
                          / fromIntegral (4 * n + 1)
-          countPrimes = length $ filter id (map isPrime corners)
-          corners = [dur, ddl, dul]
+          countPrimes = length $ filter id (map isPrime diags)
+          diags = [dur, ddl, dul]
           dur = 4 * n ^ 2 - 2 * n + 1
           ddl = 4 * n ^ 2 + 2 * n + 1
           dul = 4 * n ^ 2 + 1
@@ -49,8 +49,3 @@ isPrime x
            | d * d > x = True
            | x `mod` d == 0 || x `mod` (d + 2) == 0 = False
            | otherwise = divCheck (d + 6)
-
--- diagUpRight = [4 * x ^ 2 - 2 * x + 1 | x <- [1..]]
--- diagdownLeft = [4 * x ^ 2 + 2 * x + 1 | x <- [1..]]
--- diagUpLeft = [4 * x ^ 2 + 1 | x <- [1..]]
--- diags = [diagUpRight, diagdownLeft, diagUpLeft]
