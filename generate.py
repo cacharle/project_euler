@@ -24,11 +24,14 @@ def read_config():
     return config
 
 
-def write_problem(index, title, sub_title, content, language_config):
-    text = '\n'.join([language_config['comment']['top'], title, sub_title, content,
+def write_problem(index, title, sub_title, content, language_config, config):
+    text = '\n'.join([language_config['comment']['top'], title, sub_title, '', content,
                       language_config['comment']['bottom']])
-    text = '\n'.join([language_config['comment']['prefix']
+                      # *[content[i * config['line_wrap']:(i + 1) * config['line_wrap']]
+                      #   for i in range(int(len(content) / config['line_wrap']))],
+    text = ('\n'.join([language_config['comment']['prefix']
                       + line for line in text.split('\n')])
+                      + '\n' * config['problem_padding'])
     slug = ''.join([c for c in title.lower().replace(' ', '_') if c.isalpha() or
                     c.isdigit() or c == '_'])
     filename = (str(index).zfill(3) + '-'
@@ -50,16 +53,16 @@ def fetch_problem(index, config, args):
 
     print('parsing data...')
     data = soup.find('div', {'id': 'content'})
-    problem_title = data.h2.text
-    problem_sub_title = data.h3.text
-    problem_data = soup.find('div', {'class': 'problem_content'})
+    problem_title = data.h2.text.strip(' \n\t')
+    problem_sub_title = data.h3.text.strip(' \n\t')
+    problem_text = soup.find('div', {'class': 'problem_content'}).text.strip(' \n\t')
 
     print('\nTitle:', problem_title)
     print('Sub title:', problem_sub_title)
-    print('Text:', problem_data.text, '\n')
+    print('Text:', problem_text, '\n')
 
-    write_problem(index, problem_title, problem_sub_title, problem_data.text,
-                  config['languages'][args['language']])
+    write_problem(index, problem_title, problem_sub_title, problem_text,
+                  config['languages'][args['language']], config)
 
 
 if __name__ == '__main__':
