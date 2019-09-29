@@ -12,9 +12,8 @@
 
 
 main = do
-    let notZeroEndedNums = filter (\x -> x `mod` 10 /= 0) [1..10 ^ 6]
-        revs = filter reversible notZeroEndedNums
-    -- print revs
+    let notZeroEndedNums = filter (\x -> x `mod` 2 /= 0) [1..10 ^ 7]
+        revs = filter reversible [1,3..10 ^ 6] --notZeroEndedNums
     print (length revs)
     -- print $ length $ filter id $ map reversible notZeroEndedNums
     -- print $ [r2 - r1 | (r1, r2) <- zip revs (tail revs)]

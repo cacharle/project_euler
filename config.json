@@ -25,7 +25,7 @@
             }
         }
     },
-    "url_format": "https://projecteuler.net/problem={index}",
+    "url_format": "http://projecteuler.net/problem={index}",
     "line_wrap": 89,
     "problem_padding": 2
 }
