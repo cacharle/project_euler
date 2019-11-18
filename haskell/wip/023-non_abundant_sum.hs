@@ -46,12 +46,12 @@ notAbundantSum x
 abundants = [n | n <- [1..28123], divSum n > n]
 
 divSum :: Int -> Int
-divSum n = factorise 2
-    where factorise d
+divSum n = factorize 2
+    where factorize d
             | d > nSqrt = 1
-            | rest == 0 && d /= quotient = d + quotient + factorise (d + 1)
-            | rest == 0 && d == quotient = quotient + factorise (d + 1)
-            | otherwise = factorise (d + 1)
+            | rest == 0 && d /= quotient = d + quotient + factorize (d + 1)
+            | rest == 0 && d == quotient = quotient + factorize (d + 1)
+            | otherwise = factorize (d + 1)
             where quotient = n `div` d
                   rest = n `mod` d
           nSqrt = floor $ sqrt $ fromIntegral n
