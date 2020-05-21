@@ -8,6 +8,7 @@
                 "bottom": "###"
             }
         },
+
         "haskell": {
             "extension": "hs",
             "comment" : {
@@ -16,6 +17,7 @@
                 "bottom": "----"
             }
         },
+
         "c": {
             "extension": "c",
             "comment" : {
@@ -24,12 +26,21 @@
                 "bottom": "*/"
             }
         },
+
         "lisp": {
             "extension": "lisp",
             "comment" : {
                 "top": ";;;;;;;;",
                 "prefix" : ";;;; ",
                 "bottom": ";;;;;;;;"
+            }
+        },
+        "rust": {
+            "extension": "rs",
+            "comment": {
+                "top": "/*",
+                "prefix" : "* ",
+                "bottom": "*/"
             }
         }
     },

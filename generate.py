@@ -25,17 +25,25 @@ def read_config():
 
 
 def write_problem(index, title, sub_title, content, language_config, config):
-    text = '\n'.join([language_config['comment']['top'], title, sub_title, '', content,
-                      language_config['comment']['bottom']])
-                      # *[content[i * config['line_wrap']:(i + 1) * config['line_wrap']]
-                      #   for i in range(int(len(content) / config['line_wrap']))],
-    text = ('\n'.join([language_config['comment']['prefix']
-                      + line for line in text.split('\n')])
-                      + '\n' * config['problem_padding'])
-    slug = ''.join([c for c in title.lower().replace(' ', '_') if c.isalpha() or
-                    c.isdigit() or c == '_'])
-    filename = (str(index).zfill(3) + '-'
-                + slug + '.' + language_config['extension'])
+    text = '\n'.join([
+        title,
+        sub_title,
+        '',
+        content,
+    ])
+
+    text = '\n'.join(
+        [language_config['comment']['prefix'] + line for line in text.split('\n')]
+    )
+    text = language_config['comment']['top'] + '\n' + text
+    text += '\n' + language_config['comment']['bottom']
+    text += '\n' * config['problem_padding']
+
+
+    slug = ''.join([c for c in title.lower().replace(' ', '_')
+                    if c.isalpha() or c.isdigit() or c == '_'])
+
+    filename = (str(index).zfill(3) + '-' + slug + '.' + language_config['extension'])
     try:
         with open(filename, 'w') as file:
             file.write(text)

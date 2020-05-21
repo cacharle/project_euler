@@ -10,3 +10,5 @@ haskell/*
 haskell/wip/*
 !haskell/wip/*.hs
 
+rust/*
+!rust/*.rs
