@@ -1,5 +1,7 @@
 # Project Euler solutions
 
+![tag](https://projecteuler.net/profile/cacharle.png)
+
 My attempt at solving some of the [Project Euler](https://projecteuler.net/) problems.
 
 I try to solve each problem in multiple languages:
