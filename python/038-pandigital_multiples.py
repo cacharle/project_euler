@@ -1,7 +1,7 @@
 # ###
 # Pandigital multiples
 # Problem 38
-# 
+#
 # Take the number 192 and multiply it by each of 1, 2, and 3:
 # 192 × 1 = 192
 # 192 × 2 = 384
@@ -12,7 +12,26 @@
 # ###
 
 
-def concatenated_prod(n):
-    cprod = ""
-    
+import itertools
+
+
+def is_palindrom(s):
+    return len(s) == 9 and ''.join(sorted(s)) == '123456789'
+
+
+largest = 0
+
+for n in range(1, 987654321):
+    results = []
+    for mul in itertools.count(1):
+        results.append(n * mul)
+        str_res = ''.join([str(x) for x in results])
+        res = int(str_res)
+        if is_palindrom(str_res) and res > largest:
+            largest = res
+            print(largest)
+        if res > 987654321:
+            break
+
+print(largest)
 
