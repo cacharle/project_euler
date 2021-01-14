@@ -1,7 +1,7 @@
 # ###
 # Coin sums
 # Problem 31
-# 
+#
 # In England the currency is made up of pound, £, and pence, p, and there are eight coins in general circulation:
 # 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
 # It is possible to make £2 in the following way:
@@ -10,19 +10,21 @@
 # ###
 
 
-coins = [200, 100, 50, 20, 10, 5, 2, 1]
-solutions = []
+count = 0
 
-def backtrack(n, sol):
-    if sum(sol) > n:
+def solve(coins):
+    s = sum(coins)
+    if s == 200:
+        global count
+        print(count, coins)
+        count += 1
         return
-    if n == 0:
-        solutions.append(sol)
+    if s > 200:
         return
-    while next_sol(n, sol):
-        backtrack(n, sol)
+    for coin in [200, 100, 50, 20, 10, 5, 2, 1]:
+        if len(coins) != 0 and coins[-1] < coin:
+            continue
+        solve(coins + [coin])
 
-def next_(n, sol):
-
-
-backtrack(10, [])
+solve([])
+print(count)
