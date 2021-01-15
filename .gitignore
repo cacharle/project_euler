@@ -12,3 +12,5 @@ haskell/wip/*
 
 rust/*
 !rust/*.rs
+
+tags
