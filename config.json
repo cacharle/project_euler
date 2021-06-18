@@ -42,6 +42,14 @@
                 "prefix" : "* ",
                 "bottom": "*/"
             }
+        },
+        "julia": {
+            "extension": "jl",
+            "comment": {
+                "top": "###",
+                "prefix" : "# ",
+                "bottom": "###"
+            }
         }
     },
     "url_format": "http://projecteuler.net/problem={index}",
