@@ -1,0 +1,50 @@
+{
+    "python": {
+        "extension": "py",
+        "comment" : {
+            "top": "###",
+            "prefix" : "# ",
+            "bottom": "###"
+        }
+    },
+    "haskell": {
+        "extension": "hs",
+        "comment" : {
+            "top": "----",
+            "prefix" : "-- ",
+            "bottom": "----"
+        }
+    },
+    "c": {
+        "extension": "c",
+        "comment" : {
+            "top": "/*",
+            "prefix" : "* ",
+            "bottom": "*/"
+        }
+    },
+    "lisp": {
+        "extension": "lisp",
+        "comment" : {
+            "top": ";;;;;;;;",
+            "prefix" : ";;;; ",
+            "bottom": ";;;;;;;;"
+        }
+    },
+    "rust": {
+        "extension": "rs",
+        "comment": {
+            "top": "/*",
+            "prefix" : "* ",
+            "bottom": "*/"
+        }
+    },
+    "julia": {
+        "extension": "jl",
+        "comment": {
+            "top": "###",
+            "prefix" : "# ",
+            "bottom": "###"
+        }
+    }
+}

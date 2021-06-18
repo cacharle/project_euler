@@ -1,0 +1,94 @@
+#!/usr/bin/env python3
+
+import json
+import itertools
+import textwrap
+from pathlib import Path
+from argparse import ArgumentParser
+
+import requests
+from bs4 import BeautifulSoup
+
+
+LANGUAGES_FILENAME = 'languages.json'
+URL_FORMAT         = 'http://projecteuler.net/problem={index}'
+LINE_WRAP          = 89
+PROBLEM_PADDING    = 3
+
+
+class Problem:
+    def __init__(self, index: int, language: dict):
+        self.index = index
+        self.language = language
+
+    def fetch(self):
+        url = URL_FORMAT.format(index=self.index)
+        print(f"Fetching problem {self.index} at {url}")
+        data = requests.get(url)
+        soup = BeautifulSoup(data.text, 'html.parser')
+        data = soup.find('div', {'id': 'content'})
+        self.title     = data.h2.text
+        self.sub_title = data.h3.text
+        self.content   = soup.find('div', {'class': 'problem_content'}).text
+        print(self)
+        return self
+
+    def write(self):
+        file_name = f'{self.index:03}-{self._slug}.{self.language["extension"]}'
+        file_path = Path(self.language['name']) / file_name
+        if file_path.exists():
+            raise FileExistsError(f'{file_path} already exists')
+        file_path.parent.mkdir(exist_ok=True)
+        with open(file_path, 'w') as file:
+            file.write(str(self))
+        return self
+
+    def __str__(self) -> str:
+        title     = self.title.strip()
+        sub_title = self.sub_title.strip()
+        content   = self.content.strip()
+
+        content_lines = []
+        for line in content.splitlines():
+            content_lines.extend(textwrap.wrap(line, width=LINE_WRAP))
+
+        lines = [title, sub_title, "", *content_lines]
+        lines = [self.language['comment']['prefix'] + line for line in lines]
+        lines.insert(0, self.language['comment']['top'])
+        lines.append(self.language['comment']['bottom'])
+        lines.extend(itertools.repeat("", PROBLEM_PADDING))
+        return '\n'.join(lines)
+
+    @property
+    def _slug(self) -> str:
+        title = self.title.lower().replace(' ', '_')
+        title = [c for c in title if c.isalnum() or c == '_']
+        return ''.join(title)
+
+
+def main():
+    with open(LANGUAGES_FILENAME, 'r') as file:
+        languages = json.load(file)
+    parser = ArgumentParser(description='Project Euler problem file generator')
+    parser.add_argument(
+        'language',
+        metavar='LANGUAGE',
+        choices=languages,
+        help='file programming language',
+    )
+    parser.add_argument(
+        'indices',
+        metavar='INDEX',
+        nargs='+',
+        type=int,
+        help='Project Euler problems index',
+    )
+    args = parser.parse_args()
+    for index in args.indices:
+        language = languages[args.language]
+        language['name'] = args.language
+        Problem(index, language).fetch().write()
+
+
+if __name__ == '__main__':
+    main()
