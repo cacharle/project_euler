@@ -10,11 +10,11 @@ import requests
 from bs4 import BeautifulSoup
 
 
-LANGUAGES_FILENAME = 'languages.json'
+ROOT_DIR           = Path(__file__).resolve().parent
+LANGUAGES_FILENAME = ROOT_DIR / 'languages.json'
 URL_FORMAT         = 'http://projecteuler.net/problem={index}'
 LINE_WRAP          = 89
 PROBLEM_PADDING    = 3
-
 
 class Problem:
     def __init__(self, index: int, language: dict):
@@ -35,7 +35,7 @@ class Problem:
 
     def write(self):
         file_name = f'{self.index:03}-{self._slug}.{self.language["extension"]}'
-        file_path = Path(self.language['name']) / file_name
+        file_path = ROOT_DIR / self.language['name'] / file_name
         if file_path.exists():
             raise FileExistsError(f'{file_path} already exists')
         file_path.parent.mkdir(exist_ok=True)

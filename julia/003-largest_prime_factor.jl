@@ -13,7 +13,7 @@ function factors(n)
     while n > 1
         for d in 2:n
             if n % d == 0
-                n = Int64(n / d)
+                n ÷= d
                 push!(factors, d)
                 break
             end
