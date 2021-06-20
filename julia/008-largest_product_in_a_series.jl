@@ -29,7 +29,7 @@
 ###
 
 
-const NUMBER_STRING = join(split("
+const NUMBER_STRING = join(split("""
     73167176531330624919225119674426574742355349194934
     96983520312774506326239578318016984801869478851843
     85861560789112949495459501737958331952853208805511
@@ -50,12 +50,16 @@ const NUMBER_STRING = join(split("
     84580156166097919133875499200524063689912560717606
     05886116467109405077541002256983155200055935729725
     71636269561882670428252483600823257530420752963450
-"))
+"""))
 
 const CHUNK_SIZE = 13
+const NUMBERS = [parse(Int, c) for c in NUMBER_STRING]
 
-const NUMBERS       = [parse(Int, c) for c in NUMBER_STRING]
-const NUMBER_CHUNKS = zip([NUMBERS[start:end] for start in 1:CHUNK_SIZE]...)
-const RESULT        = maximum(cumprod(chunk)[end] for chunk in NUMBER_CHUNKS)
+result = (
+    (NUMBERS[start:end] for start in 1:CHUNK_SIZE)
+    |> x -> zip(x...)
+    |> x -> map(prod, x)
+    |> maximum
+)
 
-println(RESULT)
+println(result)

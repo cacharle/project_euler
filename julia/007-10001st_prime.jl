@@ -10,6 +10,8 @@
 using Printf
 using Base.Iterators
 
+# Can't use eratosthenes sieve since we don't know when to stop (no predefined list of numbers)
+# A algorithm that caches the previous found primes should be faster
 function is_prime(n)
     if n == 2 || n == 3 || n == 5
         return true
@@ -17,7 +19,7 @@ function is_prime(n)
     if n % 2 == 0 || n % 3 == 0 || n % 5 == 0
         return false
     end
-    for d in 6:6:Int64(ceil(sqrt(n)) + 1)
+    for d in 6:6:ceil(Integer, √n) + 1
         if n % (d - 1) == 0 || n % (d + 1) == 0
             return false
         end
@@ -25,13 +27,13 @@ function is_prime(n)
     true
 end
 
-counter = 0
-for n in Iterators.countfrom(2)
-    if is_prime(n)
-        global counter += 1
-        @printf "%5d: %d\n" counter n
-    end
-    if counter == 10_001
-        break
-    end
-end
+const PRIME_INDEX = 10_001
+
+result = (
+    Iterators.countfrom(2)
+    |> x -> Iterators.filter(is_prime, x)
+    |> x -> Iterators.take(x, PRIME_INDEX)
+    |> collect
+)[end]
+
+println(result)

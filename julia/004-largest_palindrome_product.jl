@@ -7,20 +7,10 @@
 # Find the largest palindrome made from the product of two 3-digit numbers.
 ###
 
-function is_palindrom(n)
+function is_palindrom(n::Integer)::Bool
     s = string(n)
     s == reverse(s)
 end
 
-
-top = -1
-
-for x in 100:999
-    for y in 100:999
-        if is_palindrom(x * y)
-            global top = max(top, x * y)
-        end
-    end
-end
-
-println(top)
+result = maximum(x * y for x in 100:999, y in 100:999 if is_palindrom(x * y))
+println(result)

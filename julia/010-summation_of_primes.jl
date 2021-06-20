@@ -12,12 +12,14 @@ function eratosthenes_sieve(stop)
     while true
         prime = pop!(ns)
         push!(primes, prime)
-        if prime > ceil(sqrt(stop))
+        if prime > ceil(Integer, √stop)
             return append!(primes, ns)
             break
         end
-        ns = filter(n -> n % prime != 0, ns)
+        filter!(n -> n % prime != 0, ns)
     end
 end
 
-println(sum(eratosthenes_sieve(2_000_000 - 1)))
+result = eratosthenes_sieve(2_000_000 - 1) |> sum
+
+println(result)

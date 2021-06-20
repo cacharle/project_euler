@@ -12,9 +12,6 @@
 # numbers and the square of the sum.
 ###
 
-const count = 100
-
-sum_of_squares = sum(x ^ 2 for x in 1:count)
-square_of_sum  = sum(1:count) ^ 2
-
-println(square_of_sum - sum_of_squares)
+const COUNT = 100
+result = sum(1:COUNT) ^ 2 - sum(x ^ 2 for x in 1:COUNT)
+println(result)

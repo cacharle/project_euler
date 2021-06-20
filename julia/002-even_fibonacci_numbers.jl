@@ -24,17 +24,12 @@ function fib(n)
 end
 
 # https://stackoverflow.com/questions/56137634/function-chaining-in-julia
-# need curried functions
-# ( (fib(n) for n in 1:1_000_000)
-#  |> takewhile(<(4_000_000))
-# )
 
-println(sum(
-    Iterators.filter(
-        x -> x % 2 == 0,
-        takewhile(
-            <(4_000_000),
-            fib(n) for n in 1:1_000_000
-        )
-    )
-))
+result = (
+    (fib(n) for n in 1:1_000_000)
+    |> r -> takewhile(<(4_000_000), r)
+    |> r -> Iterators.filter(x -> (x % 2) == 0, r)
+    |> sum
+)
+
+println(result)

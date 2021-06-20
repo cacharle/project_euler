@@ -22,4 +22,5 @@ function factors(n)
     factors
 end
 
-println(maximum(factors(NUMBER)))
+result = factors(NUMBER) |> maximum
+println(result)

@@ -13,14 +13,10 @@
 using Base.Iterators
 
 
-for c in countfrom(1)
-    for b in 1:(c - 1)
-        for a in 1:(b - 1)
-            if  a ^ 2 + b ^ 2 == c ^ 2 && a + b + c == 1000
-                println(a * b * c)
-                exit(0)
-            end
-        end
+for c in countfrom(1), b in 1:(c - 1), a in 1:(b - 1)
+    if  a ^ 2 + b ^ 2 == c ^ 2 && a + b + c == 1000
+        println(a * b * c)
+        break
     end
 end
 
