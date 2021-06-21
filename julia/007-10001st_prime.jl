@@ -7,7 +7,6 @@
 # What is the 10 001st prime number?
 ###
 
-using Printf
 using Base.Iterators
 
 # Can't use eratosthenes sieve since we don't know when to stop (no predefined list of numbers)

@@ -71,6 +71,11 @@ def main():
         languages = json.load(file)
     parser = ArgumentParser(description='Project Euler problem file generator')
     parser.add_argument(
+        '-p', '--preview',
+        action='store_true',
+        help='see a preview of the file without creating it',
+    )
+    parser.add_argument(
         'language',
         metavar='LANGUAGE',
         choices=languages,
@@ -87,7 +92,10 @@ def main():
     for index in args.indices:
         language = languages[args.language]
         language['name'] = args.language
-        Problem(index, language).fetch().write()
+        problem = Problem(index, language)
+        problem.fetch()
+        if not args.preview:
+            problem.write()
 
 
 if __name__ == '__main__':
