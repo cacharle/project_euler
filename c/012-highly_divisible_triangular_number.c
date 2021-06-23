@@ -15,7 +15,7 @@ int count_divisors(int nb)
     int i, div_nb = 0;
     for (i = 1; i <= sqrt(nb); i++) {
         if (nb % i == 0)
-            div_nb += (i != nb / i ? 2 : 1);
+            div_nb += (i != nb / i ? 2 : 1);  // how the hell did I get there? eddie woo
     }
     return div_nb;
 }
