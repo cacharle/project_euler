@@ -20,8 +20,8 @@
 using Base.Iterators
 
 function is_bouncy(n)
-    s = collect(string(n))
-    !(issorted(s) || issorted(s, rev=true))
+    ds = digits(n)
+    !(issorted(ds) || issorted(ds, rev=true))
 end
 
 const RATIO = 0.99

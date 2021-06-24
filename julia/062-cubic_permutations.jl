@@ -17,7 +17,7 @@ const PERMUTATIONS_COUNT = 5
 
 for n in countfrom(2)
     cube = n ^ 3
-    key = sort(collect(string(cube)))
+    key = sort(digits(cube))
     if !haskey(cache, key)
         cache[key] = [cube]
     else
