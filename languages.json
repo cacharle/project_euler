@@ -46,5 +46,21 @@
             "prefix" : "# ",
             "bottom": "###"
         }
+    },
+    "clojure": {
+        "extension": "clj",
+        "comment" : {
+            "top": ";;;;",
+            "prefix" : ";; ",
+            "bottom": ";;;;"
+        }
+    },
+    "scheme": {
+        "extension": "scm",
+        "comment" : {
+            "top": ";;;;",
+            "prefix" : ";; ",
+            "bottom": ";;;;"
+        }
     }
 }

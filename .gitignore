@@ -13,4 +13,7 @@ haskell/wip/*
 rust/*
 !rust/*.rs
 
+scheme/*
+!scheme/*.scm
+
 tags
