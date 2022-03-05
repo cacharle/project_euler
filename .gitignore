@@ -15,5 +15,6 @@ rust/*
 
 scheme/*
 !scheme/*.scm
+!scheme/Makefile
 
 tags

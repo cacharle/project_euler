@@ -13,13 +13,12 @@
 
 (define +top+ 4000000)
 
-(define fib
-  (lambda (n)
-    (case n
-      ((0) 1)
-      ((1) 1)
-      (else (+ (fib (- n 1))
-               (fib (- n 2)))))))
+(define (fib n)
+  (case n
+    ((0) 1)
+    ((1) 1)
+    (else (+ (fib (- n 1))
+             (fib (- n 2))))))
 
 (define result
   (sum
