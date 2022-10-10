@@ -10,11 +10,12 @@ import requests
 from bs4 import BeautifulSoup
 
 
-ROOT_DIR           = Path(__file__).resolve().parent
+ROOT_DIR = Path(__file__).resolve().parent
 LANGUAGES_FILENAME = ROOT_DIR / 'languages.json'
-URL_FORMAT         = 'http://projecteuler.net/problem={index}'
-LINE_WRAP          = 89
-PROBLEM_PADDING    = 3
+URL_FORMAT = 'http://projecteuler.net/problem={index}'
+LINE_WRAP = 89
+PROBLEM_PADDING = 3
+
 
 class Problem:
     def __init__(self, index: int, language: dict):
@@ -27,9 +28,9 @@ class Problem:
         data = requests.get(url)
         soup = BeautifulSoup(data.text, 'html.parser')
         data = soup.find('div', {'id': 'content'})
-        self.title     = data.h2.text
+        self.title = data.h2.text
         self.sub_title = data.h3.text
-        self.content   = soup.find('div', {'class': 'problem_content'}).text
+        self.content = soup.find('div', {'class': 'problem_content'}).text
         print(self)
         return self
 
@@ -44,9 +45,9 @@ class Problem:
         return self
 
     def __str__(self) -> str:
-        title     = self.title.strip()
+        title = self.title.strip()
         sub_title = self.sub_title.strip()
-        content   = self.content.strip()
+        content = self.content.strip()
 
         content_lines = []
         for line in content.splitlines():
